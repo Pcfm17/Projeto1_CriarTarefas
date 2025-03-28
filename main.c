@@ -36,6 +36,26 @@ else if(opcao == 3){
    if (codigo ==1) //Erro 12
    printf("Erro ao listar tarefas: nao existem tarefas para serem listadas");
 }
+else if(opcao == 4){ //É a nova funcao de editarTarefa
+	codigo=editarTarefa(&lt);
+	if(codigo == 1)
+	printf("Erro ao editar tarefa: nao existe tarefa para ser editada.\n");
+	else if(codigo == 2)
+	printf("erro ao editar a tarefa: posicao invalida\n");
+}
+else if(opcao == 5){ //É a nova funcao de editarTarefa
+	int prioridade;
+	printf("Digite a prioridade para contar as tarefas: ");
+    scanf("%d", &prioridade);
+	int total = contarTarefas(&lt, prioridade);
+    printf("Total de tarefas com prioridade %d: %d\n", prioridade, total);
+}
+else if (opcao == 6) { // É a nova funcao que busca tarefas por categoria
+    char categoria[100];
+    printf("Digite a categoria para buscar: ");
+    scanf("%s", categoria);
+    buscarTarefasPorCategoria(&lt, categoria);
+}
 else {
 	printf("opcao invalida\n");
 }

@@ -82,5 +82,64 @@ void exibirMenu(){ //Erro 10
     printf("1. Criar tarefa\n");
     printf("2. Deletar tarefa\n");
 	printf("3. Listar tarefa\n");
+    printf("4. Editar tarefa\n");
+    printf("5. Contar tarefas por prioridade\n");
+    printf("6. Buscar tarefas por categoria\n");
 	printf("0. Sair\n");
 	}
+
+//Adicionando novas funções para editar e salvar tarefas
+    
+// Função para editar uma tarefa
+int editarTarefa(ListaDeTarefas *lt) {
+    if (lt->qtd == 0) {
+        return 1; // Nenhuma tarefa para editar
+    }
+
+    int pos;
+    printf("Digite a posição da tarefa que deseja editar: ");
+    scanf("%d", &pos);
+
+    if (pos < 0 || pos >= lt->qtd) {
+        return 2; // Posição inválida
+    }
+
+    printf("Nova prioridade: ");
+    scanf("%d", &lt->tarefas[pos].prioridade);
+
+    printf("Nova categoria: ");
+    scanf("%s", lt->tarefas[pos].categoria);
+
+    printf("Nova descrição: ");
+    scanf("%s", lt->tarefas[pos].descricao);
+
+    return 0;
+}
+
+// Função para contar tarefas com determinada prioridade
+int contarTarefas(ListaDeTarefas *lt, int prioridade) {
+    int contador = 0;
+    int i;
+    for (i = 0; i < lt->qtd; i++) {
+        if (lt->tarefas[i].prioridade == prioridade) {
+            contador++;
+        }
+    }
+    return contador;
+}
+
+// Função para buscar tarefas por categoria
+void buscarTarefasPorCategoria(ListaDeTarefas *lt, char *categoria) {
+    int encontrou = 0;
+    int i;
+    for (i = 0; i < lt->qtd; i++) {
+        if (strcmp(lt->tarefas[i].categoria, categoria) == 0) {
+            printf("Posição: %d | Prioridade: %d | Descrição: %s\n", 
+                   i, lt->tarefas[i].prioridade, lt->tarefas[i].descricao);
+            encontrou = 1;
+        }
+    }
+    if (!encontrou) {
+        printf("Nenhuma tarefa encontrada na categoria '%s'.\n", categoria);
+    }
+}
